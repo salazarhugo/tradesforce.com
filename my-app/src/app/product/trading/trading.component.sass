@@ -1,0 +1,320 @@
+@keyframes blink
+  from
+    background-color: black
+  to
+    background-color: white
+
+img
+  max-width: 100%
+
+body
+  background: white
+
+h1
+  margin: 0 0 20px
+  font-size: 38px
+
+p
+  font-size: 18px
+  color: #000
+  margin: 0 0 30px
+
+span:after
+  background: none repeat scroll 0 0 transparent
+  bottom: 0
+  content: ""
+  display: block
+  height: 2px
+  left: 50%
+  position: absolute
+  background: #000
+  transition: width 0.3s ease 0s, left 0.3s ease 0s
+  width: 0
+
+span:hover:after
+  width: 100%
+  left: 0
+
+rect
+  fill: transparent !important
+
+section::after
+  overflow: hidden
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%)
+
+.masthead
+  transition: transform .3s ease
+  width: 100%
+  z-index: 9999
+  color: black
+
+.masthead__content
+  display: flex
+  justify-content: center
+  margin: 10px 0 30px
+  background-color: white
+  box-sizing: border-box
+  flex-direction: row
+
+.masthead__left
+  display: flex
+  align-items: center
+
+.masthead__right
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  width: 250px
+
+.masthead__logo-container
+  display: flex
+  align-items: center
+  transition: width 200ms cubic-bezier(0.6, 0.1, 0.6, 0.2)
+  margin-right: 30px
+  width: 84px
+  height: 65px
+  justify-content: center
+
+.masthead__terminal-container
+  display: flex
+  align-items: center
+
+.masthead__terminal-cursor
+  width: 16px
+  height: 4px
+  background-color: black
+  animation-name: blink
+  animation-duration: 2s
+  animation-iteration-count: infinite
+  bottom: 5px
+  left: 5px
+
+.masthead__title
+  align-items: center
+  overflow: hidden
+  white-space: nowrap
+  float: left
+  font-family: Arial, Helvetica, sans-serif
+  font-size: 20px
+  line-height: 30px
+  color: #1c1c1c
+  font-weight: 200
+  animation: typing 1s steps(40, end)
+  margin: 0 auto
+
+.nav
+  display: flex
+
+.nav ul
+  display: flex
+  margin: 0
+
+.masthead__nav-item
+  align-items: center
+  border-bottom: 1px solid transparent
+  border-top: 1px solid transparent
+  color: #000
+  cursor: pointer
+  font-size: 16px
+  font-weight: 400
+  list-style: none
+  margin-right: 30px
+  position: relative
+  text-decoration: none
+  transition: border-bottom .5s ease
+
+.masthead__nav-item--active
+  border-bottom: 1px solid #d8d8d8
+  border-top: 1px solid #d8d8d8
+  font-weight: 500
+
+.header__nav-item--active .header__nav-item__text::after
+  background-color: #4285f4
+
+.masthead__nav-item__text
+  -ms-flex-align: center
+  align-items: center
+  display: -ms-inline-flexbox
+  display: inline-flex
+  height: 100%
+  position: relative
+  text-align: center
+
+.masthead__user-button
+  align-items: center
+  box-sizing: border-box
+  display: -ms-flexbox
+  display: flex
+  height: 100%
+  line-height: 1em
+  -ms-flex-pack: center
+  justify-content: center
+
+.masthead__mobile
+  display: none
+  justify-content: space-between
+  align-items: center
+  overflow-y: hidden
+  width: 100%
+
+.masthead__mobile-product-lockup
+  display: flex
+  align-items: center
+  justify-content: center
+  flex: 1
+  height: 65px
+
+.masthead__mobile-menu-btn
+  cursor: pointer
+  height: 65px
+  width: 65px
+  position: absolute
+
+.masthead__mobile__search
+  height: 65px
+  left: 65px
+  pointer-events: none
+  position: absolute
+  top: 0
+  width: calc(100% - 65px)
+
+.masthead__mobile__search form
+  display: flex
+  -ms-flex-pack: end
+  justify-content: flex-end
+  margin: 15px 24px 15px 0
+
+@media (max-width: 1340px)
+  .masthead__right
+    width: 150px
+
+@media (max-width: 1160px)
+  .masthead__mobile
+    display: flex
+  .nav
+    display: none
+  .masthead__content
+    box-shadow: 0 2px 4px -2px rgba(175, 175, 175, 0.5)
+    margin: 0
+  .masthead
+    position: fixed
+    top: 0
+
+/* The typing effect */
+@keyframes typing
+  from
+    width: 0
+  to
+    width: 100%
+
+.terminal
+  position: relative
+  width: 80%
+  max-width: 600px
+  border-radius: 6px
+  padding-top: 45px
+  margin-top: 8px
+  overflow: hidden
+  background-color: rgb(15, 15, 16)
+
+.terminal::before
+  content: "\2022 \2022 \2022"
+  position: absolute
+  top: 0
+  left: 0
+  height: 4px
+  background: rgb(58, 58, 58)
+  color: #c2c3c4
+  width: 100%
+  font-size: 2rem
+  line-height: 0
+  padding: 14px 0
+  text-indent: 4px
+  animation: typing .5s steps(40, end)
+
+.terminal pre
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace
+  color: white
+  padding: 0 1rem 1rem
+  margin: 0
+
+.title-container
+  margin: 0 0 0 auto
+  max-width: 500px
+  width: 100%
+  flex-direction: column
+
+*, :after, :before
+  box-sizing: border-box
+
+.pretty-card:hover
+  box-shadow: 0 0 35px -2px rgba(0, 0, 0, .2)
+  cursor: pointer
+
+.pretty-card-grid
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  margin: 0 auto
+  max-width: 1200px
+
+.pretty-card
+  display: flex
+  flex-direction: column
+  align-items: center
+  flex: 1 1 30%
+  padding: 20px
+  margin: 0 20px 20px
+  border-radius: 8px
+  transition: box-shadow .3s
+  max-width: 400px
+  text-align: center
+  border-radius: 4px
+
+@media (max-width: 768px)
+  .pretty-card
+    flex: 1 1 80%
+    margin: 0 0 20px
+  app-home-portfolio
+    display: none
+  .title-container
+    text-align: center
+    margin: 0 auto
+
+.pretty-card-svg
+  color: #02203c
+  width: 50px
+  transition: color .3s, transform .3s
+
+.footer__container
+  border-top: 1px solid #000
+  width: 80%
+  margin: 0 auto
+  padding: 24px 0 30px 0
+
+.footer__nav
+  display: flex
+
+.footer__nav ul
+  display: flex
+  margin: 0
+
+.footer__nav-item
+  color: #000
+  cursor: pointer
+  font-size: 14px
+  font-weight: 400
+  list-style: none
+  margin-right: 30px
+  position: relative
+  text-decoration: none
+  transition: border-bottom .5s ease
+
+.footer__nav-item--active
+  border-bottom: 1px solid #d8d8d8
+  border-top: 1px solid #d8d8d8
+  font-weight: 500
+
+.footer__copyright
+  color: #000
+  font-size: 13px

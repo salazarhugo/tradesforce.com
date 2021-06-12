@@ -1,0 +1,166 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+
+@include mat.core();
+
+@import 'light-theme';
+@import 'dark-theme.scss';
+@import 'custom-component-themes.scss';
+
+@include custom-components-theme($app-light-theme, $app-theme-info, $app-theme-success, $app-theme-warning, $app-theme-error, $app-theme-grey);
+@include mat.all-component-themes($app-light-theme);
+
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  @include custom-components-theme($dark-theme, $dark-theme-info, $dark-theme-success, $dark-theme-warning, $dark-theme-error, $dark-theme-grey);
+
+  .striped:nth-child(odd) {
+    background-color: #1c1c1c;
+  }
+}
+
+// Define a custom typography config that overrides the font-family
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Google Sans, Helvetica Neue, sans-serif',
+);
+
+//@include mat.all-component-typographies($custom-typography);
+@include mat.typography-hierarchy($custom-typography);
+
+/* GLOBAL STYLES */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%
+}
+
+body {
+  font-family: "Google Sans", Arial, sans-serif;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+// Add this to your global stylesheet after your theme setup
+.dialog-border-radius-12 .mat-dialog-container {
+  border-radius: 12px;
+}
+
+.dialog-300-border-radius-12 .mat-dialog-container {
+  border-radius: 12px;
+  min-width: 300px;
+}
+
+.dialog-400-border-radius-12 .mat-dialog-container {
+  border-radius: 12px;
+  min-width: 400px;
+}
+
+.lars-login-dialog .mat-dialog-container {
+  border-top: 5px solid #000;
+  border-radius: 6px;
+  width: 300px;
+  padding: 25px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.mat-chip-list-wrapper {
+  flex-wrap: nowrap !important;
+}
+
+.mat-chip {
+  white-space: nowrap !important;
+}
+
+.mat-row {
+  min-height: 36px !important;
+}
+
+.mat-list-item-content {
+  padding-left: 24px !important
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.levitate {
+  background-color: white;
+  box-shadow: 1px 1px 10px 0 rgb(32, 33, 36, 0.1);
+  border-radius: 8px;
+}
+
+.border {
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  vertical-align: baseline;
+}
+
+.buttons {
+  align-items: center;
+  margin-left: auto;
+}
+
+.mat-drawer {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-drawer-side {
+  border-right: none;
+}
+
+.mat-list-item, .mat-list-item-ripple {
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.mat-list-item.selected {
+  font-weight: bold;
+  color: red !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-list-base, .mat-list-item .lars-nav-list-item {
+  height: 40px;
+}
+
+.striped:nth-child(odd) {
+  background-color: #f9f9f9
+}
+
+.mat-row:nth-child(even) {
+  background-color: transparent;
+}
+

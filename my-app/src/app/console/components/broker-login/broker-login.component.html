@@ -1,0 +1,28 @@
+<mat-dialog-content>
+  <h1>Broker Login</h1>
+
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Broker</mat-label>
+      <mat-select formControlName="broker">
+        <mat-option *ngFor="let broker of brokers" [value]="broker">
+          {{broker}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Account number / Login</mat-label>
+      <input matInput formControlName="login" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Investor Password</mat-label>
+      <input matInput formControlName="password" required>
+    </mat-form-field>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary">Create</button>
+</mat-dialog-actions>

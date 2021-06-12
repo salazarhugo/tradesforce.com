@@ -1,0 +1,12 @@
+@import '../../../../../node_modules/@angular/material/theming';
+
+@mixin masthead-theme($theme, $app-theme-success, $app-theme-warning, $app-theme-error) {
+
+  // Extract the palettes you need from the theme definition.
+  // $accent: maor($app-theme-error, 400);
+
+  .masthead .masthead__content {
+    background-color: #202020;
+    // color: white
+  }
+}

@@ -1,0 +1,18 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+// define 3 theme color
+// mat-palette accepts $palette-name, main, lighter and darker variants
+$dark-primary: mat.define-palette(mat.$blue-palette, 500);
+$dark-accent: mat.define-palette(mat.$blue-grey-palette, 700, 300, 900);
+$dark-warn: mat.define-palette(mat.$red-palette);
+
+// create theme (use mat-dark-theme for themes with dark backgrounds)
+$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// themes for notifications
+$dark-theme-info: mat.define-palette(mat.$blue-palette);
+$dark-theme-success: mat.define-palette(mat.$green-palette);
+$dark-theme-warning: mat.define-palette(mat.$yellow-palette);
+$dark-theme-error: mat.define-palette(mat.$red-palette);
+
+$dark-theme-grey: #ffffff;

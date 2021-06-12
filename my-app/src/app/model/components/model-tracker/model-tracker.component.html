@@ -1,0 +1,65 @@
+<div style="margin: auto; max-width: 1136px;">
+  <div class="header">
+    <h1>Model tracker</h1>
+    <div class="buttons">
+      <button mat-button color="primary">Columns</button>
+      <button mat-icon-button color="primary">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-card class="mat-elevation-z0 border" style="padding-top: 10px;">
+    <div style="float: right;">
+      <button mat-icon-button color="primary">
+        <mat-icon>save_alt</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" (click)="openAddProprety()">New model proprety</button>
+    </div>
+    <div class="table-container">
+      <mat-table [dataSource]="dataSource" matSort>
+        <!-- Name price Definition -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Model proprety name</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.name}} </mat-cell>
+        </ng-container>
+
+        <!--Type Description Definition -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.type}} </mat-cell>
+        </ng-container>
+
+        <!-- Description Definition -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+        </ng-container>
+
+        <!-- Edit/Delete Definition -->
+        <ng-container matColumnDef="controls">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button mat-icon-button [matMenuTriggerFor]="menu"
+              aria-label="Details icon for editing a stock in a portfolio">
+              <mat-icon style="color: #505050">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Edit</button>
+              <button mat-menu-item (click)="deleteProprety(row.id)">Delete</button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <mat-header-row *matHeaderRowDef="displayColumns">
+        </mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+      </mat-table>
+
+      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,122 @@
+<section class="responsive-section flex">
+  <div style="margin-top: 30px; width: 100%">
+    <div class="container padding flex">
+
+      <div class="left">
+        <h1 class="mat-display-2">Better insights, better&nbsp;outcomes</h1>
+        <h2 class="subtitle">
+          Make better decisions with the platform for data.
+        </h2>
+        <div class="buttons-container">
+          <button mat-flat-button color="primary">Sign In</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+                          class="highcharts-chart"></highcharts-chart>
+        <!--        <app-carousel [images]="images"></app-carousel>-->
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<mat-divider class="container"></mat-divider>
+
+<section class="responsive-section">
+  <div class="container">
+
+    <div class="center-align">
+      <h2 class="mat-display-1">Tools for a more productive workday</h2>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%">
+      <div fxFlex="">
+        <app-sector-distribution [data]="mockData" hideTable="true" title="Individual Asset Allocation">
+        </app-sector-distribution>
+      </div>
+      <div fxFlex="">
+        <h3 class="mat-display-1">Portfolio diversification</h3>
+        <ul class="margin-top--15 margin-bottom--10">
+          <li>
+            Track individual asset allocation
+          </li>
+          <li>
+            Stay on top of your portfolio diversification
+          </li>
+          <li>
+            Decrease your portfolio risk by diversifying
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="margin-top--60" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%">
+      <div fxFlex>
+        <h3 class="mat-display-1">Portfolio diversification</h3>
+        <ul class="margin-top--15 margin-bottom--10">
+          <li>
+            Organize account leads, contacts, and opportunities easily, right out of the box
+          </li>
+          <li>
+            Manage every level of your sales org with governed, customizable, workflows
+          </li>
+          <li>
+            Combine data from other systems to gain deep, valuable insights into prospects and customers
+          </li>
+          <li>
+            Maximize retention and upsell, while minimizing churn
+          </li>
+        </ul>
+      </div>
+      <div fxFlex>
+        <app-sector-distribution [data]="mockDataCustomTags" title="Geographic Allocation">
+        </app-sector-distribution>
+      </div>
+    </div>
+
+    <div class="margin-top--60" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5%">
+      <div fxFlex>
+        <app-sector-distribution [data]="mockDataCustomTags" title="Geographic Allocation">
+        </app-sector-distribution>
+      </div>
+      <div fxFlex>
+        <h3 class="mat-display-1">Portfolio diversification</h3>
+        <ul class="margin-top--15 margin-bottom--10">
+          <li>
+            Decrease your portfolio risk by diversifying
+          </li>
+          <li>
+            Stay on top of your portfolio diversification
+          </li>
+          <li>
+            Combine data from other systems to gain deep, valuable insights into prospects and customers
+          </li>
+          <li>
+            Maximize retention and upsell, while minimizing churn
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--<mat-divider class="container"></mat-divider>-->
+
+<!--<section class="responsive-section">-->
+<!--  <div fxLayout="row wrap" fxLayoutGap="0.5% grid">-->
+<!--    <div fxFlex="calc(33% - 0.5%">-->
+<!--      <app-sector-distribution [data]="mockData" title="Individual Asset Allocation">-->
+<!--      </app-sector-distribution>-->
+<!--    </div>-->
+<!--    <div fxFlex="calc(33% - 0.5%)">-->
+<!--    </div>-->
+<!--    <div fxFlex="calc(33% - 0.5%)">-->
+<!--      <app-sector-distribution title="Custom Tags Allocation" [data]="mockData">-->
+<!--      </app-sector-distribution>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<app-footer></app-footer>

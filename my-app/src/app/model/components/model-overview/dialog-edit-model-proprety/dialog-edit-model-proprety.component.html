@@ -1,0 +1,20 @@
+<mat-dialog-content>
+    <h1>Edit proprety</h1>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Ex. Trend Following with Doji" [(ngModel)]="proprety.name">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-select [(ngModel)]="proprety.type" name="model">
+            <mat-option *ngFor="let type of types" [value]="type">
+                {{type}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

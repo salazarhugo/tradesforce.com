@@ -1,0 +1,16 @@
+<mat-dialog-content style="display: block;">
+  <h1>Add</h1>
+
+  <input matInput type="color" [(ngModel)]="tag.color" style="width: 30px;">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <textarea matInput [(ngModel)]="tag.name"></textarea>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" cdkFocusInitial (click)="addTag()">Add</button>
+</mat-dialog-actions>

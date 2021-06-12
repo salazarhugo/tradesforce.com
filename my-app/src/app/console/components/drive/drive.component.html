@@ -1,0 +1,118 @@
+<header fxLayout="row" style="justify-content: space-between">
+  <div *ngIf="currentFolder$ | async as currentFolder;" fxLayout="row" fxLayoutAlign="center">
+    <div *ngFor="let path of (path$ | async); index as i" fxLayoutAlign="center center">
+      <svg *ngIf="i != 0" class=" a-s-fa-Ha-pa" fill="#000000" focusable="false" height="24px" viewBox="0 0 24 24"
+           width="24px">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+      </svg>
+      <button (click)="goIntoFolder(path.id)" mat-button>
+        <span class="path-name grey">{{path.name}}</span>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <input (change)="uploadFile($event)" type="file">
+    <button aria-label="Icon button with a upload file icon" mat-icon-button>
+      <mat-icon>upload_file</mat-icon>
+    </button>
+
+    <button (click)="openAddFolderDialog()" aria-label="Icon button with a crate new folder icon" mat-icon-button>
+      <mat-icon>create_new_folder</mat-icon>
+    </button>
+
+    <button (click)="deleteFiles()" aria-label="Icon button with a crate new folder icon" mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+</header>
+
+<mat-divider></mat-divider>
+
+<div style="margin-top: 15px">
+
+  <mat-menu #menuFolder="matMenu">
+    <ng-template let-folder="folder" matMenuContent>
+      <button (click)="deleteFolder(folder)" mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+      <button mat-menu-item>
+        <mat-icon>link</mat-icon>
+        Get link
+      </button>
+      <button (click)="renameFolder(folder)" mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        Rename
+      </button>
+      <button mat-menu-item>
+        <mat-icon>search</mat-icon>
+        Search within {{folder.name}}
+      </button>
+    </ng-template>
+  </mat-menu>
+
+  <mat-menu #menuFile="matMenu">
+    <ng-template let-file="file" matMenuContent>
+      <button (click)="deleteFolder(file)" mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+      <button mat-menu-item>
+        <mat-icon>link</mat-icon>
+        Get link
+      </button>
+      <button (click)="renameFile(file)" mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        Rename
+      </button>
+      <button mat-menu-item>
+        <mat-icon>download</mat-icon>
+        Download file
+      </button>
+    </ng-template>
+  </mat-menu>
+
+  <!-- Folders -->
+  <span class="group-label">Folders</span>
+  <div *ngIf="childFolders$ | async as childFolders" fxLayout="row wrap" fxLayoutGap="20px">
+    <div (click)="goIntoFolder(childFolder.id)" (contextmenu)="onRightClick($event, childFolder)"
+         *ngFor="let childFolder of childFolders"
+         class="folder" fxFlex="initial">
+      <mat-icon>folder</mat-icon>
+      <span class="folder-name">{{childFolder.name}}</span>
+    </div>
+
+  </div>
+
+  <div [matMenuTriggerFor]="menuFolder"
+       [style.left]="menuTopLeftPosition.x"
+       [style.top]="menuTopLeftPosition.y"
+       style="visibility: hidden; position: fixed;"></div>
+
+  <!--  <div style="visibility: hidden; position: fixed;"-->
+  <!--       [style.left]="menuTopLeftPosition.x"-->
+  <!--       [style.top]="menuTopLeftPosition.y"-->
+  <!--       [matMenuTriggerFor]="menuFolder"></div>-->
+
+  <!-- Files -->
+  <span class="group-label">Files</span>
+  <div *ngIf="files$ | async as files" fxLayoutAlign="row wrap" fxLayoutGap="20px">
+    <div (click)="goToFile(file)" (contextmenu)="onRightClickFile($event, file)" *ngFor="let file of files" class="file"
+         fxFlex="initial">
+      <mat-icon>file</mat-icon>
+      <span class="folder-name">{{file.name}}</span>
+    </div>
+  </div>
+</div>
+
+<!-- File Uploading Progress Bar -->
+<div class="uploading-files">
+  <ng-template [ngForOf]="uploadingFiles" let-file let-i="index" ngFor>
+    <h3 class="mat-h3">{{file.name}}</h3>
+    <span class="mat-caption">{{file.error ? 'Error' : file.progress | percent : '1.0-0'}}</span>
+    <mat-progress-bar [color]="file.error ? 'warn' : 'primary'" [value]="file.error ? 100 : file.progress * 100"
+                      mode="determinate"></mat-progress-bar>
+  </ng-template>
+</div>

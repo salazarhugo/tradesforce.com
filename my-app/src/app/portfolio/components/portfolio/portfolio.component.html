@@ -1,0 +1,39 @@
+<div class="header">
+  <h1 class="mat-h1">
+    {{portfolio.name}}
+    <span class="mat-subheading-1">{{portfolio.stockCount}} assets</span>
+  </h1>
+  <div class="buttons">
+    <span class="mat-caption">Currency in {{portfolio.currency.iso_code}}</span>
+    <button (click)="openAddStockDialog()" color="primary" mat-button matTooltip="Add a new stock to your portolfio">
+      <mat-icon color="primary">add</mat-icon>
+      Add stock
+    </button>
+    <button color="primary" mat-button matTooltip="Print">
+      <mat-icon color="primary">print</mat-icon>
+      Print
+    </button>
+    <button color="primary" mat-button matTooltip="Import">
+      <mat-icon color="primary">get_app_outline</mat-icon>
+      Import
+    </button>
+    <button color="primary" mat-button matTooltip="Export">
+      <mat-icon class="material-icons-outlined" color="primary">publish</mat-icon>
+      Export
+    </button>
+    <button (click)="openEditCurrencyDialog()" color="primary" mat-button matTooltip="Change currency">
+      <mat-icon class="material-icons-outlined" color="primary">payments</mat-icon>
+      Edit currency
+    </button>
+    <colomns-checkbox [columns]="columns"></colomns-checkbox>
+
+    <button color="primary" mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</div>
+
+<portfolio-header [stocks]="stocks" [portfolio]="portfolio"></portfolio-header>
+<br>
+
+<router-outlet></router-outlet>

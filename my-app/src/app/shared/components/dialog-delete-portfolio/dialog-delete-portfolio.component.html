@@ -1,0 +1,13 @@
+<mat-dialog-content *ngIf="!disabled; else loading">
+  <h1>Delete</h1>
+
+</mat-dialog-content>
+
+<ng-template #loading>
+  <mat-spinner style="margin:0 auto;"></mat-spinner>
+</ng-template>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="warn" (click)="deletePortfolio()" [disabled]="disabled" cdkFocusInitial>Delete</button>
+</mat-dialog-actions>

@@ -1,0 +1,92 @@
+<div style="width: 100%;user-select: none;" class="mat-elevation-z8 mat-table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Entry date price Definition -->
+    <ng-container matColumnDef="entrydate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Entry date </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{renderTable__date(row.entrydate)}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Definition -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.symbol}} </mat-cell>
+    </ng-container>
+
+    <!-- Strategy Definition -->
+    <ng-container matColumnDef="strategy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Strategy </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.strategy}} </mat-cell>
+    </ng-container>
+
+    <!-- Timeframe Definition -->
+    <ng-container matColumnDef="timeframe">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Timeframe </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.timeframe}} </mat-cell>
+    </ng-container>
+
+    <!-- Type price Definition -->
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.direction}} </mat-cell>
+    </ng-container>
+
+    <!-- Entry price Definition -->
+    <ng-container matColumnDef="entryprice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Entry price </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.entryprice}} </mat-cell>
+    </ng-container>
+
+    <!-- Exit date price Definition -->
+    <ng-container matColumnDef="exitdate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Exit date </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{renderTable__date(row.exitdate)}} </mat-cell>
+    </ng-container>
+
+    <!-- Exit price Definition -->
+    <ng-container matColumnDef="exitprice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Exit price </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.exitprice}} </mat-cell>
+    </ng-container>
+
+    <!-- Profit Definition -->
+    <ng-container matColumnDef="profit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Profit </mat-header-cell>
+      <mat-cell *matCellDef="let row" [ngClass]="{
+              'positive' : row.profit > 0,
+              'negative' : row.profit < 0
+           }"> {{renderTable__price(row.profit)}} </mat-cell>
+    </ng-container>
+
+    <!-- Quantity Definition -->
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Qte </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
+    </ng-container>
+
+    <!-- Valid Definition -->
+    <ng-container matColumnDef="valid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Valid </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-icon *ngIf="row.valid" matTooltip="Valid" matTooltipPosition="right" style="color: #34a853;">done
+        </mat-icon>
+        <mat-icon *ngIf="!row.valid" matTooltip="Invalid" matTooltipPosition="above" style="color: red;">close
+        </mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Comment Definition -->
+    <ng-container matColumnDef="comment">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Comment </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.comment}}</mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="displayColumns">
+    </mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+
+  </mat-table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

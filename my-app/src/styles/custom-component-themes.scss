@@ -1,0 +1,14 @@
+// import custom componenet themes
+// unofficial naming convention to support nice ordering of files in IDE
+// to see theme under the original style file of the componenent
+@import '../app/services/notification/notification-theme.scss';
+@import '../app/core/components/masthead/masthead-theme.scss';
+@import '../app/console/components/lars-mat-nav-list/lars-mat-nav-list-theme.scss';
+
+// you only have to add additional componenets here (instead of in every theme class)
+@mixin custom-components-theme($theme, $theme-info, $theme-success, $theme-warning, $theme-error, $theme-grey) {
+  @include notification-theme($theme-info, $theme-success, $theme-warning, $theme-error);
+  @include masthead-theme($theme, $theme-success, $theme-warning, $theme-error);
+  @include lars-mat-nav-list-theme($theme, $theme-grey);
+}
+

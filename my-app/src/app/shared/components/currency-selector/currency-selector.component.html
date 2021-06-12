@@ -1,0 +1,32 @@
+<mat-dialog-content>
+  <h3 style="text-align: center;">Change portfolio currency</h3>
+  <mat-form-field [style.width.%]="100" appearance="fill">
+    <mat-label>Select billing/legal country or region</mat-label>
+
+    <mat-select #countryMatSelect [formControl]="currencyControl" cdkFocusInitial>
+      <mat-select-trigger>
+        <country-flag [country]="currencyControl.value.iso_code.toLowerCase()"></country-flag>
+        <span class="grey"> {{currencyControl.value.name}} </span>
+        <span class="grey">({{currencyControl.value.iso_code}}
+          {{currencyControl.value.symbol}})</span>
+      </mat-select-trigger>
+
+      <mat-option *ngFor="let currency of currencies" [value]="currency">
+        <country-flag [country]="currency.iso_code.toLowerCase()"></country-flag>
+        <span class="grey"> {{currency.name}} </span>
+        <span class="grey">({{currency.iso_code}} {{currency.symbol}})</span>
+      </mat-option>
+    </mat-select>
+
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="primary">Cancel</button>
+  <div *ngIf="data | async as portfolio">
+    <button mat-button cdkFocusInitial color="primary"
+            [disabled]="currencyControl.value.iso_code == portfolio.currency.iso_code"
+            (click)="apply()">Apply
+    </button>
+  </div>
+</mat-dialog-actions>

@@ -1,0 +1,73 @@
+<mat-dialog-content style="display: block;">
+  <h1>Add</h1>
+  <h4>Core</h4>
+  <mat-form-field appearance="outline">
+    <mat-label>Entry date</mat-label>
+    <input type="datetime-local" matInput [(ngModel)]="trade.entrydate">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Symbol</mat-label>
+    <input matInput [(ngModel)]="trade.symbol" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Quantity</mat-label>
+    <input type="number" matInput [(ngModel)]="trade.quantity" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Direction</mat-label>
+    <mat-select [(value)]="trade.direction">
+      <mat-option *ngFor="let dir of ToArray()" [value]="dir">{{dir}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Profit</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.profit" placeholder="Profit">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Commission</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.commission" placeholder="Commission">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Swap</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.swap" placeholder="Swap">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Entry price</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.entryprice" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Stoploss</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.stoploss" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Takeprofit</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.takeprofit" placeholder="Placeholder">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Exit price</mat-label>
+    <input matInput type="number" [(ngModel)]="trade.exitprice" placeholder="Placeholder">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Exit date</mat-label>
+    <input type="datetime-local" matInput [(ngModel)]="trade.exitdate">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Comment</mat-label>
+    <textarea matInput [(ngModel)]="trade.comment"></textarea>
+  </mat-form-field>
+
+  <h4>Additional information</h4>
+  <mat-checkbox [(value)]="trade.valid">Valid</mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" cdkFocusInitial (click)="addTrade(trade)">Add</button>
+  <button mat-flat-button color="primary" cdkFocusInitial (click)="addMockTrade()">Add Mock</button>
+</mat-dialog-actions>

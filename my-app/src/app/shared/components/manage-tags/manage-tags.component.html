@@ -1,0 +1,37 @@
+<mat-dialog-content>
+  <h1 style="width: 300px;">Manage tags</h1>
+  <br>
+  <input matInput type="color" [(ngModel)]="tag.color" style="width: 30px;vertical-align: middle;">
+
+  <mat-form-field appearance="legacy" style="margin: 0 15px;">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Ex. ETF" [(ngModel)]="tag.name">
+  </mat-form-field>
+
+  <button mat-raised-button matTooltip="Your tags" (click)="addTag()">Add tag</button>
+
+  <mat-list>
+    <mat-label>Tags</mat-label>
+    <mat-list-item *ngFor="let tag of tags">
+
+      <input matInput type="color" value="{{tag.color}}" style="width: 30px;">
+      {{tag.name}}
+
+      <div style="position: absolute;right: 0;">
+        <button mat-icon-button aria-label="Edit tag icon" (click)="editTag(tag)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button aria-label="Delete tag icon" (click)="deleteTag(tag)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button mat-dialog-close cdkFocusInitial>Done</button>
+</mat-dialog-actions>

@@ -1,0 +1,43 @@
+<mat-icon aria-hidden="false" aria-label="Example home icon">date_range</mat-icon>
+
+<mat-form-field appearance="outline">
+  <mat-label>Date filter</mat-label>
+  <mat-select [(ngModel)]="selectedValue" name="food">
+    <mat-option value="today">
+      Today
+    </mat-option>
+    <mat-option value="yesterday">
+      Yesterday
+    </mat-option>
+    <mat-option value="today">
+      This week
+    </mat-option>
+    <mat-option value="today">
+      Last week
+    </mat-option>
+    <mat-option value="today">
+      Last 7 days
+    </mat-option>
+    <mat-option value="today">
+      Last 28 days
+    </mat-option>
+    <mat-option value="today">
+      Last 30 days
+    </mat-option>
+    <mat-option value="today">
+      Last 90 days
+    </mat-option>
+    <mat-option value="today">
+      Last 12 month
+    </mat-option>
+    <mat-option value="today">
+      Last calendar year
+    </mat-option>
+    <mat-option value="today">
+      This year (Jan - Today)
+    </mat-option>
+    <mat-option value="custom">
+      Custom
+    </mat-option>
+  </mat-select>
+</mat-form-field>

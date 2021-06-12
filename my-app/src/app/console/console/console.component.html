@@ -1,0 +1,13 @@
+<app-masthead></app-masthead>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav [mode]="mode" fixedInViewport="true" fixedTopGap="66" opened>
+    <lars-mat-nav-list role="navigation"></lars-mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

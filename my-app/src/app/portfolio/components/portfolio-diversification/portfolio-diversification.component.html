@@ -1,0 +1,18 @@
+<div fxLayout="row wrap" fxLayoutGap="0.5% grid">
+  <div fxFlex="calc(33% - 0.5%">
+    <app-sector-distribution [data]="stockAllocation" [user]="user" title="Individual Asset Allocation">
+    </app-sector-distribution>
+  </div>
+  <div fxFlex="calc(33% - 0.5%)">
+    <app-sector-distribution [data]="regionAllocation" [user]="user" title="Geographic Allocation">
+    </app-sector-distribution>
+  </div>
+  <div fxFlex="calc(33% - 0.5%)">
+    <app-sector-distribution title="Custom Tags Allocation" [user]="user" [data]="tagsAllocation">
+    </app-sector-distribution>
+  </div>
+  <div fxFlex="calc(33% - 0.5%)">
+    <app-sector-distribution title="Stock Exchange Distribution" [user]="user" [data]="stockExchangeAllocation">
+    </app-sector-distribution>
+  </div>
+</div>

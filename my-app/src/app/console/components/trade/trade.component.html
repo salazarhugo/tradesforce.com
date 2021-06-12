@@ -1,0 +1,142 @@
+<br>
+<div style="display: flex;align-items: center;">
+  <h1 style="white-space: nowrap;" matTooltip="{{trade.id}}">{{trade.symbol}}
+    <span class="mat-caption">#{{trade.id}}</span>
+  </h1>
+  <button mat-icon-button color="accent" style="margin-left: 25px;" aria-label="Example icon button with a delete icon"
+          matTooltip="Move To" [matMenuTriggerFor]="modelsMenu">
+    <mat-icon>drive_file_move</mat-icon>
+  </button>
+
+  <mat-menu #modelsMenu>
+    <div *ngIf="(models$ | async) as models">
+      <button (click)="moveTrade(trade, model.id)" *ngFor="let model of models" mat-menu-item>
+        {{model.name}}
+      </button>
+    </div>
+  </mat-menu>
+
+  <button mat-icon-button color="accent" aria-label="Example icon button with a delete icon"
+          matTooltip="Edit" (click)="openEditTradeDialog()">
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>
+
+<stroked-card>
+  <h1 style="white-space: nowrap;">{{trade.profit}} </h1>
+  <table id="tradeStatsTable" *ngIf="trade">
+    <caption style="text-align: left">Trade Statistics</caption>
+    <tr>
+      <td>Open time:</td>
+      <td>{{renderTable__date(trade?.entrydate)}}</td>
+    </tr>
+    <tr>
+      <td>Close time:</td>
+      <td>{{renderTable__date(trade?.exitdate)}}</td>
+    </tr>
+    <tr>
+      <td>Direction:</td>
+      <td>{{trade?.direction}}</td>
+    </tr>
+    <tr>
+      <td>Timeframe:</td>
+      <td>{{trade?.timeframe}}</td>
+    </tr>
+    <tr>
+      <td>Lots:</td>
+      <td>{{trade?.quantity}}</td>
+    </tr>
+    <tr>
+      <td>Open price:</td>
+      <td>{{trade?.entryprice}}</td>
+    </tr>
+    <tr>
+      <td>Close price:</td>
+      <td>{{trade?.exitprice}}</td>
+    </tr>
+    <tr>
+      <td>Stop loss</td>
+      <td>{{trade?.stoploss}}</td>
+    </tr>
+    <tr>
+      <td>Take profit</td>
+      <td>{{trade?.takeprofit}}</td>
+    </tr>
+    <tr>
+      <td>Swap:</td>
+      <td>{{trade?.swap}}</td>
+    </tr>
+    <tr>
+      <td>Commission:</td>
+      <td>{{trade?.commission}}</td>
+    </tr>
+    <tr>
+      <td>Captured Pips:</td>
+      <td>{{(trade?.exitprice - trade?.entryprice) * 10000 | number : '1.0-0'}}</td>
+    </tr>
+    <tr>
+      <td>Comment:</td>
+      <td>{{trade?.comment}}</td>
+    </tr>
+  </table>
+  <mat-form-field appearance="fill">
+    <mat-label>Notes</mat-label>
+    <textarea type="text" [value]="trade.comment" matInput></textarea>
+  </mat-form-field>
+</stroked-card>
+
+<!--<section class="section-one">-->
+<!--  <div class="left-container">-->
+<!--    <mat-card class="mat-elevation-z0" style="width: 250px;padding: 0; user-select: none;">-->
+<!--      <div class="trade-header" matRipple>-->
+<!--        <span style="font-weight: 500;">{{trade?.symbol}}</span>-->
+<!--        <mat-divider [vertical]="true"></mat-divider>-->
+<!--        <pretty-span number="{{trade?.profit}}" style="font-weight: 500;"></pretty-span>-->
+<!--      </div>-->
+<!--      <mat-divider></mat-divider>-->
+<!--      <div style="font-size: 14px;padding: 15px;user-select: text;">-->
+<!--        <div>Open time: {{renderTable__date(trade?.entrydate)}}</div>-->
+<!--        <div>Close time: {{renderTable__date(trade?.exitdate)}}</div>-->
+<!--        <div>Magic:</div>-->
+<!--        <div>Action:</div>-->
+<!--        <div>Timeframe: {{trade?.timeframe}}</div>-->
+<!--        <div>Lots: {{trade?.quantity}}</div>-->
+<!--        <div>Open price: {{trade?.entryprice}}</div>-->
+<!--        <div>Close price: {{trade?.exitprice}}</div>-->
+<!--        <div>Stop loss{{trade?.stoploss}}</div>-->
+<!--        <div>Take profit{{trade?.takeprofit}}</div>-->
+<!--        <div>Swap:</div>-->
+<!--        <pretty-span number="{{trade?.commission}}"></pretty-span>-->
+<!--        <div>Commission:{{trade?.commission}}</div>-->
+<!--        <div>Change:</div>-->
+<!--        <div>Duration:</div>-->
+<!--        <div>Pips:</div>-->
+<!--        <div>Comment: {{trade?.comment}}</div>-->
+<!--      </div>-->
+<!--      <mat-divider></mat-divider>-->
+<!--      <div class="trade-footer" matRipple>-->
+<!--        <mat-icon *ngIf="trade?.valid else invalid" matTooltip="Valid" matTooltipPosition="right"-->
+<!--                  style="color: #34a853;">done-->
+<!--        </mat-icon>-->
+<!--        <ng-template #invalid>-->
+<!--          <mat-icon matTooltip="Invalid" matTooltipPosition="above" style="color: red;">close-->
+<!--          </mat-icon>-->
+<!--        </ng-template>-->
+<!--      </div>-->
+<!--    </mat-card>-->
+<!--  </div>-->
+<div class="right-container">
+  <mat-card *ngIf="trade" class="mat-elevation-z0 border" style="padding: 20px;">
+    <div style="height: 700px" id="tv_chart_container"></div>
+    <app-tv-chart [trade]="trade" [symbol]="trade.symbol"></app-tv-chart>
+  </mat-card>
+</div>
+
+<!--</section>-->
+
+<br>
+
+<section>
+  <!--  <input type="file" (change)="uploadFile($event.target.files)">-->
+  <button mat-raised-button color="primary">Upload</button>
+</section>

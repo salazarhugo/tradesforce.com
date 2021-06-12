@@ -1,0 +1,51 @@
+<div>
+  <h1 class="mat-h1">{{quote.companyName}} ({{quote.symbol}})
+    <mat-icon class="status-icon" style="vertical-align: middle"
+              matTooltip="This report is based on 100.0% of available data." color="primary">check
+    </mat-icon>
+  </h1>
+  <span class="mat-caption"> {{quote.primaryExchange}} </span>
+  <a href="https://iexcloud.io">IEX Cloud</a>
+  <div *ngIf="sseQuote | async as quote">
+    <h1 class="mat-h1">
+      {{quote.latestPrice | number: '1.2-2'}}
+    </h1>
+    <div>
+      {{quote.change | number: '1.2-2'}}
+    </div>
+    <div>
+      {{quote.changePercent | percent: '1.2-2'}}
+    </div>
+    <div>
+      {{quote.latestSource}}
+    </div>
+  </div>
+  <div class="buttons">
+  </div>
+
+  <stroked-card>
+    <iframe
+      src="https://docs.google.com/presentation/d/e/2PACX-1vQ7ydheMrq1toda3CRcl3SNIsqtNv0jsd9EXBlf9xfiYsTfqTE-X6cPk-ltEQBCvgBLvDryG5NbgmEu/embed?start=false&loop=false&delayms=3000"
+       frameborder="0"
+            width="960"
+            height="749"
+            allowfullscreen="true"
+            mozallowfullscreen="true"
+            webkitallowfullscreen="true"></iframe>
+  </stroked-card>
+
+  <stroked-card>
+    <div class="tradingview-widget-container">
+      <app-tv-chart symbol="ADBE"></app-tv-chart>
+    </div>
+    <!-- TradingView Widget BEGIN -->
+    <!--      <div id="tradingview_e321e"></div>-->
+<!--      <div class="tradingview-widget-copyright">-->
+<!--        <a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank">-->
+<!--          <span class="blue-text">AAPL Chart</span>-->
+<!--        </a> by TradingView-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; TradingView Widget END &ndash;&gt;-->
+  </stroked-card>
+</div>

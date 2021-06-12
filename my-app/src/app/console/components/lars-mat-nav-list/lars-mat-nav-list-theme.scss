@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+@mixin lars-mat-nav-list-theme($theme, $grey) {
+
+  // Extract the palettes you need from the theme definition.
+  // $accent: maor($app-theme-error, 400);
+  //$grey: map-get($theme, app-grey);
+
+  .group-label {
+    color: $grey;
+  }
+
+  .grey {
+    color: $grey;
+  }
+
+  .mat-icon {
+    color: $grey;
+  }
+}

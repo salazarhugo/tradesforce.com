@@ -1,0 +1,18 @@
+<mat-dialog-content>
+  <h1>Add model</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Ex. Trend Following with Doji" [(ngModel)]="model.name">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Financial market</mat-label>
+    <input matInput placeholder="Ex. Forex" [(ngModel)]="model.financialMarket">
+  </mat-form-field>
+  <br>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="addModel()" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

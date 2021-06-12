@@ -1,0 +1,78 @@
+<mat-dialog-content>
+  <h1>Add</h1>
+  <mat-form-field appearance="outline" [style.width.px]=280>
+    <mat-label>Symbol</mat-label>
+    <mat-icon matSuffix>search</mat-icon>
+    <input type="text" matInput placeholder="Ex. GOOGL"
+           aria-label="Ticker Symbol"
+           [(ngModel)]="stock.symbol"
+           [formControl]="symbolControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option fxLayout="row" *ngFor="let stock of filteredSymbols | async" [value]="stock.symbol">
+        <div fxFlex="15%">
+          <mat-icon color="primary">add</mat-icon>
+        </div>
+        <div fxFlex="70%" fxLayout="column" style="overflow: hidden">
+          <span class="mat-caption" style="font-weight: bold"> {{stock.symbol}} </span>
+          <span class="mat-caption"> {{stock.securityName}} </span>
+        </div>
+        <div fxLayout="column">
+          <span class="mat-caption"> {{stock.region}} </span>
+          <span class="mat-caption"> {{stock.exchange}} </span>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br>
+  <!--  <mat-form-field appearance="outline">-->
+  <!--    <mat-label>Currency</mat-label>-->
+  <!--    <input matInput type="text" min="1" aria-label="Currency" [(ngModel)]="stock.currency">-->
+  <!--  </mat-form-field>-->
+  <!--  <br>-->
+  <mat-form-field appearance="outline">
+    <mat-label>Quantity</mat-label>
+    <input matInput type="number" min="1" aria-label="Quantity" [(ngModel)]="stock.quantity">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Average price</mat-label>
+    <input matInput type="number" [(ngModel)]="stock.averagePrice">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Region</mat-label>
+    <input matInput [(ngModel)]="stock.region">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Color</mat-label>
+    <input matInput type="color" [(ngModel)]="stock.color">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tags</mat-label>
+    <mat-chip-list #chipList aria-label="Stock sector" *ngIf="stock.tags != undefined">
+      <mat-chip *ngFor="let tag of stock.tags" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(tag)">
+        {{tag}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="New tag..." #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
+             [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+        {{tag}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="addStock()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

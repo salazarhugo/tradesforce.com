@@ -1,0 +1,201 @@
+.mat-icon
+  margin-right: 15px
+
+span:after
+  background: none repeat scroll 0 0 transparent
+  bottom: 0
+  content: ""
+  display: block
+  height: 2px
+  left: 50%
+  position: absolute
+  background: #000
+  transition: width 0.3s ease 0s, left 0.3s ease 0s
+  width: 0
+
+span:hover:after
+  width: 100%
+  left: 0
+
+rect
+  fill: transparent !important
+
+.masthead
+  background: white
+  position: fixed
+  width: 100%
+  z-index: 3
+  height: 60px
+  border-bottom: 1px solid #DADCE0
+  transition: transform .3s ease
+  margin-bottom: 100px
+
+.container
+  display: flex
+  height: 60px
+  align-items: center
+  width: 90%
+  margin: 0 auto
+  clear: both
+  max-width: 1200px
+
+.masthead__left
+  display: flex
+  align-items: center
+
+.masthead__right
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  width: 250px
+
+.masthead__logo-container
+  display: flex
+  align-items: center
+  transition: width 200ms cubic-bezier(0.6, 0.1, 0.6, 0.2)
+  margin-right: 30px
+  width: 84px
+  height: 65px
+  justify-content: center
+
+.masthead__title
+  align-items: center
+  overflow: hidden
+  white-space: nowrap
+  float: left
+  font-family: Arial, Helvetica, sans-serif
+  font-size: 20px
+  line-height: 30px
+  color: #1c1c1c
+  font-weight: 200
+  animation: typing 1s steps(40, end)
+  margin: 0 auto
+
+.nav
+  display: flex
+  flex-grow: 1
+
+.nav ul
+  display: flex
+  margin: 0
+
+.masthead__nav-item
+  align-items: center
+  border-bottom: 1px solid transparent
+  border-top: 1px solid transparent
+  color: #5F6368
+  cursor: pointer
+  font-size: 14px
+  font-family: "Google Sans", "Open Sans", Arial, Helvetica, sans-serif
+  font-weight: 300
+  list-style: none
+  margin-right: 30px
+  position: relative
+  text-decoration: none
+  transition: border-bottom .5s ease
+
+.masthead__nav-item--active
+  border-bottom: 1px solid #d8d8d8
+  border-top: 1px solid #d8d8d8
+  font-weight: 500
+
+.header__nav-item--active .header__nav-item__text::after
+  background-color: #4285f4
+
+.masthead__nav-item__text
+  -ms-flex-align: center
+  align-items: center
+  display: -ms-inline-flexbox
+  display: inline-flex
+  height: 100%
+  position: relative
+  text-align: center
+
+.masthead__user-button
+  align-items: center
+  box-sizing: border-box
+  display: -ms-flexbox
+  display: flex
+  height: 100%
+  line-height: 1em
+  -ms-flex-pack: center
+  justify-content: center
+
+.masthead__mobile
+  display: none
+  justify-content: space-between
+  align-items: center
+  overflow-y: hidden
+  width: 100%
+
+.masthead__mobile-product-lockup
+  display: flex
+  align-items: center
+  justify-content: center
+  flex: 1
+  height: 65px
+
+.masthead__mobile-menu-btn
+  cursor: pointer
+  height: 65px
+  width: 65px
+  position: absolute
+
+.masthead__mobile__search
+  height: 65px
+  left: 65px
+  position: absolute
+  top: 0
+  width: calc(100% - 65px)
+
+.masthead__mobile__search form
+  display: flex
+  -ms-flex-pack: end
+  justify-content: flex-end
+  margin: 15px 24px 15px 0
+
+@media (max-width: 1340px)
+
+.masthead__right
+  width: 150px
+
+// @media (max-width: 1160px)
+// .masthead__mobile
+//     display: flex
+// .masthead__nav
+//     display: none
+// .masthead__content
+//     box-shadow: 0 2px 4px -2px rgba(175,175,175,0.5)
+//     margin: 0
+// .masthead
+//     position: fixed
+//     top: 0
+
+.footer__container
+  padding: 24px 0 30px 0
+
+.footer__nav
+  display: flex
+
+.footer__nav ul
+  display: flex
+  margin: 0
+
+.footer__nav-item
+  color: #ffffff
+  cursor: pointer
+  font-size: 14px
+  font-weight: 400
+  list-style: none
+  margin-right: 30px
+  position: relative
+  text-decoration: none
+  transition: border-bottom .5s ease
+
+.footer__nav-item--active
+  border-bottom: 1px solid #d8d8d8
+  border-top: 1px solid #d8d8d8
+  font-weight: 500
+
+.footer__copyright
+  font-size: 13px

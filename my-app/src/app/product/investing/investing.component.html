@@ -1,0 +1,100 @@
+<section style="height: auto;background: white;color: #000;display: flex; border-bottom: 1px solid #DADCE0;">
+  <div style="width: 100%">
+    <div class="container padding flex">
+
+      <div class="left">
+        <h1 i18n class="mat-display-3">Find true edge in&nbsp;the&nbsp;markets</h1>
+        <h2 i18n class="mat-headline">Drive better outcomes through smarter data-driven<br>experiences.</h2>
+        <div class="buttons-container">
+          <a *ngIf="auth.user | async as user; else showLogin">
+            <button mat-flat-button color="primary" routerLink="/console/dashboard">Go to console</button>
+          </a>
+          <ng-template #showLogin>
+            <button mat-flat-button color="primary" (click)="openLoginDialog()">Sign In</button>
+          </ng-template>
+          <button mat-stroked-button color="primary" routerLink="../platform/overview">Learn more</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <app-carousel [images]="images"></app-carousel>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="responsive-section">
+  <div class="container">
+
+    <div class="container--900 center-align">
+      <h2 i18n class="mat-display-1">Enlighten your investments</h2>
+      <p i18n class="margin--bottom--45">Reveal the true power of your data and bring clarity to every situation. Lars data analytics platform provides more options to help you deliver more through the use of strong, fresh insights.</p>
+    </div>
+
+    <div>
+      <div fxLayout="row wrap" fxLayoutGap="3% grid">
+        <div fxFlex="calc(25% - 3%)">
+          <h2 class="mat-h3">Powerful & Limitless analytics</h2>
+          <p>
+            Serve up real-time <a href="/product/visualizations">dashboards</a> for more in-depth, consistent analysis. Access to trustworthy data enables teams to collect fresh results for more precise reporting.
+          </p>
+          <a class="margin-top--20" mat-button href="https://www.google.com/" target="_blank" color="primary">CCA case study</a>
+        </div>
+         <div fxFlex="calc(25% - 3%)">
+           <h2 class="mat-h3">Integrated insights</h2>
+           <p>Enhance the tools you’re already using by infusing new, relevant data. Unify and empower your teams to make more effective, data-informed decisions.</p>
+           <a class="margin-top--20" mat-button href="https://www.google.com/" target="_blank" color="primary">CCA case study</a>
+         </div>
+           <div fxFlex="calc(25% - 3%)">
+            <h2 class="mat-h3">Professionals indicators</h2>
+            <p>Get access to professional trading & investing tools used by hedge funds.</p>
+            <a class="margin-top--20" mat-button href="https://www.google.com/" target="_blank" color="primary">CCA case study</a>
+         </div>
+            <div fxFlex="calc(25% - 3%)">
+            <h2 class="mat-h3">Control your finance</h2>
+            <p>Organize your trading models, investing portfolios, ideas and strategies through a unified platform.</p>
+            <a class="margin-top--20" mat-button href="https://www.google.com/" target="_blank" color="primary">CCA case study</a>
+          </div>
+        </div>
+      <div class="center-align">
+        <button mat-stroked-button color="primary">Product overview</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<mat-divider class="container"></mat-divider>
+
+<section class="responsive-section">
+  <div class="container">
+    <div class="container--900 center-align">
+      <h2 class="mat-display-1">Experience the perks of the platform</h2>
+      <p style="margin-bottom: 30px">Reveal the true power of your data and bring clarity to every situation. Looker & Google Cloud’s data analytics platform provides more options to help you deliver more through the use of strong, fresh insights.</p>
+    </div>
+  </div>
+</section>
+
+<section class="responsive-section grey-50-bg">
+  <div class="container">
+    <div class="center-align">
+      <p class="quote-box">We provide meaningful feedback to gain an edge over the markets.</p>
+    </div>
+<!--    <span class="mat-caption">Hugo Salazar, CEO</span>-->
+  </div>
+</section>
+
+<section class="responsive-section">
+  <div class="container">
+    <div class="container--900 center-align">
+      <h2 class="mat-display-1">Our providers</h2>
+      <img width="300px" src="/assets/img/IEX-logo/Logotype/Standard/IEX%20Logotype%20(standard).svg">
+      <img width="300px" src="/assets/img/logos_cloud/logo_lockup_cloud_rgb.png">
+      <img width="300px" src="/assets/img/firebase-logo-standard.svg">
+      <img width="300px" src="/assets/img/looker-logo.svg">
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

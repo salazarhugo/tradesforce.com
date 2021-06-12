@@ -1,0 +1,82 @@
+<div class="header">
+  <h1 class="mat-h1">My Portfolios ({{total}} total)</h1>
+  <div class="buttons">
+    <button mat-button color="primary" (click)="openAddDialog()" matTooltip="Create a new portfolio">
+      <mat-icon color="primary">add</mat-icon>
+      Create Portfolio
+    </button>
+    <button mat-button color="primary">Columns</button>
+    <button mat-icon-button color="primary">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-card class="mat-elevation-z0 filter">
+  <mat-icon>filter_list</mat-icon>
+  <input matInput placeholder="Filter by portfolio name, stocks, renewal date and more">
+</mat-card>
+
+<br>
+<mat-table class="border" [dataSource]="dataSource" matSort>
+  <!-- Name Definition -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a (click)="navigateToPortfolio(row)" class="portfolio-name grey"
+         style="margin-left: 15px; text-align: left;">{{row.name}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Count Definition -->
+  <ng-container matColumnDef="stockCount">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Symbols</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row.stockCount}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Currency Definition -->
+  <ng-container matColumnDef="currency">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Currency</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{row.currency.iso_code}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Status Definition -->
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-icon *ngIf="row.status" matTooltip="No issues" matTooltipPosition="right" style="color: #34a853;">done
+      </mat-icon>
+      <mat-icon *ngIf="!row.status" matTooltip="Invalid" matTooltipPosition="above" style="color: red;">close
+      </mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Edit/Delete Definition -->
+  <ng-container matColumnDef="controls">
+    <mat-header-cell *matHeaderCellDef> Edit / Delete</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button matTooltip="Edit" aria-label="Edit icon for editing a stock in a portfolio"
+              (click)="openEditDialog(row)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Delete" aria-label="Delete icon for deleting a stock in a portfolio"
+              (click)="openDeleteDialog(row.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </mat-cell>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="displayColumns">
+  </mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayColumns">
+    <mat-divider [vertical]="true"></mat-divider>
+  </mat-row>
+</mat-table>
+
+<new-portfolio-button (click)="openAddDialog()"></new-portfolio-button>

@@ -1,0 +1,147 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [(opened)]="opened" fixedInViewport fixedTopGap="66" mode="side" position="end"
+               style="width: 320px;">
+    <app-filter-builder [modelId]="model.id" [sidenav]="sidenav"></app-filter-builder>
+  </mat-sidenav>
+
+  <section>
+    <div class="header">
+      <h1 class="mat-h1">
+        {{model.name}}
+        <span class="mat-subheading-1">{{(trades$ | async)?.length}} trades</span>
+      </h1>
+      <div class="buttons">
+        <!--        <span class="mat-caption">Currency in {{portfolio.currency.iso_code}}</span>-->
+        <!--        <button (click)="openAddStockDialog()" color="primary" mat-button matTooltip="Add a new stock to your portolfio">-->
+        <!--          <mat-icon color="primary">add</mat-icon>-->
+        <!--          Add stock-->
+        <!--        </button>-->
+
+        <button color="primary" mat-button matTooltip="Print">
+          <mat-icon color="primary">print</mat-icon>
+          Print
+        </button>
+        <button color="primary" (click)="openBrokerLoginDialog()" mat-button matTooltip="Import">
+          <mat-icon color="primary">get_app_outline</mat-icon>
+          Import
+        </button>
+        <button color="primary" mat-button matTooltip="Export">
+          <mat-icon class="material-icons-outlined" color="primary">publish</mat-icon>
+          Export
+        </button>
+        <button color="primary" mat-button matTooltip="Change currency">
+          <mat-icon class="material-icons-outlined" color="primary">payments</mat-icon>
+          Edit currency
+        </button>
+        <colomns-checkbox></colomns-checkbox>
+
+        <button (click)="addEntry()" color="primary" mat-raised-button>Add entry</button>
+        <button color="primary" mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="filter-selector">
+      <button (click)="sidenav.toggle()" class="filter-button" mat-button>
+        <span class="filter-title">
+          Add filter
+        </span>
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-chip-list *ngIf="filters$ | async as filters" aria-label="Tag selection">
+        <mat-chip (removed)="remove(filter)" *ngFor="let filter of filters" color="primary" removable selectable>
+          {{filter.property}} {{filter.strOperation}} {{filter.value}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <br>
+
+    <stroked-card style="margin-bottom: 15px;">
+      <div fxLayout="row" fxLayoutGap="20px" *ngIf="modelStats$ | async as stats">
+        <div class="chart-header-item">
+          <span class="mat-caption">Net Total profit</span>
+          <span class="header-stat" [appIBnumber]="stats.profitSum + stats.commissionSum + stats.swapSum">
+          </span>
+        </div>
+        <div class="chart-header-item">
+          <span class="mat-caption">Brut Total profit</span>
+          <span class="header-stat" [appIBnumber]="stats.profitSum"></span>
+        </div>
+        <div class="chart-header-item">
+          <span class="mat-caption">Current streak</span>
+          <span class="header-stat">{{streak[0]}} {{streak[1]}}</span>
+        </div>
+      </div>
+
+      <div fxLayout="column">
+        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" fxFlex="50%"
+                          style="width: 100%; height: 400px;"></highcharts-chart>
+        <div fxFlex="50%" fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="50%">
+              <h1 class="mat-h1">Win rate</h1>
+              <highcharts-chart [Highcharts]="Highcharts" [options]="winrateChartOptions"></highcharts-chart>
+            </div>
+            <div fxFlex="50%">
+              <h1 class="mat-h1">Risk ratio</h1>
+              <highcharts-chart [Highcharts]="Highcharts" [options]="bChartOptions"></highcharts-chart>
+            </div>
+          </div>
+          <div>
+            <div fxLayout="row">
+              <highcharts-chart [Highcharts]="Highcharts" [options]="directionChartOptions"
+                                fxFlex="50%"></highcharts-chart>
+              <!--              <highcharts-chart fxFlex="50%" [Highcharts]="Highcharts"  [options]="winrateChartOptions"></highcharts-chart>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </stroked-card>
+
+    <br>
+    <stroked-card>
+      <table *ngIf="modelStats$ | async as stats" id="modelStatsTable" style="width:50%">
+        <tr class="striped">
+          <td>Win count</td>
+          <td>{{stats.winCount}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Loss count</td>
+          <td>{{stats.lossCount}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Average win</td>
+          <td> {{stats.winAvg | number}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Average loss</td>
+          <td>{{stats.lossAvg | number : '1.2-2'}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Mathematical expectancy</td>
+          <td> {{stats.expectancy | number: '1.2-2'}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Total commission</td>
+          <td> {{stats.commissionSum | number: '1.2-2'}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Average duration</td>
+          <td> {{stats.tradeDurationAvg | date}}</td>
+        </tr>
+        <tr class="striped">
+          <td>Total duration</td>
+          <td> {{ stats.tradeDurationTotal | number }}</td>
+        </tr>
+      </table>
+    </stroked-card>
+
+    <br>
+    <stroked-card style="margin-bottom: 15px;">
+      <app-table-forex [trades$]="trades$"></app-table-forex>
+    </stroked-card>
+
+    <br>
+  </section>
+</mat-sidenav-container>

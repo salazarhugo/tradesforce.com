@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "lars-3a83f"
+  },
+  "targets": {
+    "lars-3a83f": {
+      "hosting": {
+        "my-app": [
+          "lars-3a83f"
+        ]
+      }
+    }
+  }
+}

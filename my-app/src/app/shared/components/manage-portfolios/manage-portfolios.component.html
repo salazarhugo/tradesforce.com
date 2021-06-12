@@ -1,0 +1,20 @@
+<mat-dialog-content>
+  <h1 style="width: 300px;">Manage portfolios</h1>
+
+  <mat-list>
+    <mat-label>Portfolios</mat-label>
+    <mat-list-item *ngFor="let portfolio of portfolios">
+      {{portfolio.name}}
+      <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon"
+        (click)="deletePortfolio(portfolio)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button mat-dialog-close cdkFocusInitial>Done</button>
+</mat-dialog-actions>

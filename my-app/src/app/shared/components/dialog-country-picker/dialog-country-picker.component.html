@@ -1,0 +1,30 @@
+<mat-dialog-content>
+    <h3 style="text-align: center;">Change your country or region</h3>
+    <mat-form-field [style.width.%]="100" appearance="fill">
+        <mat-label>Select billing/legal country or region</mat-label>
+
+        <mat-select #countryMatSelect [formControl]="countryControl" cdkFocusInitial>
+            <mat-select-trigger>
+                <country-flag [country]="countryControl.value.iso"></country-flag>
+                <span class="country-name"> {{countryControl.value.name}} </span>
+                <span class="currency-name">({{countryControl.value.currencyName}}
+                    {{countryControl.value.currencySymbol}})</span>
+            </mat-select-trigger>
+
+            <mat-option *ngFor="let country of countries" [value]="country">
+                <country-flag [country]="country.iso"></country-flag>
+                <span class="country-name"> {{country.name}} </span>
+                <span class="currency-name">({{country.currencyName}} {{country.currencySymbol}})</span>
+            </mat-option>
+        </mat-select>
+
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">Cancel</button>
+    <div *ngIf="data | async as user">
+        <button mat-button cdkFocusInitial color="primary" [disabled]="countryControl.value.iso == user.country.iso"
+            (click)="apply()">Apply</button>
+    </div>
+</mat-dialog-actions>

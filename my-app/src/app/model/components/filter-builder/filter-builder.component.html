@@ -1,0 +1,86 @@
+<header class="right-panel-header">
+  <mat-icon style="vertical-align: middle;">addchart</mat-icon>
+  <h2>Build filter</h2>
+  <button (click)="sidenav.toggle()" aria-label="Example icon button with a close icon" mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<mat-divider></mat-divider>
+
+<stroked-card>
+  <div class="card-header">Conditions (Build up to five)</div>
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="filterForm">
+    <div class="dimension-label-header">
+      <button [matMenuTriggerFor]="menu" mat-button>
+        Include
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" formControlName="include">
+        <button mat-menu-item>Include</button>
+        <button mat-menu-item>Exclude</button>
+      </mat-menu>
+      <button aria-label="Example icon button with a vertical three dot icon" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select dimension</mat-label>
+      <mat-select formControlName="property" required>
+        <mat-option>None</mat-option>
+        <mat-optgroup *ngFor="let group of dimensionGroups"
+                      [disabled]="group.disabled"
+                      [label]="group.name">
+          <mat-option *ngFor="let property of group.properties" [value]="property">
+            {{property.viewValue}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>String operation</mat-label>
+      <mat-select formControlName="strOperation" required>
+        <mat-option *ngFor="let strOperation of strOperations[filterForm.value.property.type]"
+                    [value]="strOperation.value">
+          {{strOperation.viewName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectedDimension != null" appearance="outline">
+      <mat-label>Dimension value</mat-label>
+      <mat-select formControlName="value" multiple>
+        <mat-option *ngFor="let value of values[filterForm.value.property.type]"
+                    [value]="value.value">
+          {{value.viewName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <button color="primary" mat-stroked-button>Add new condition</button>
+  </form>
+</stroked-card>
+
+<div style="display: flex;flex-direction: column; padding: 12px 16px;">
+  <div class="summary-section">
+    <span class="caption">SUMMARY</span>
+    <div class="summary">
+      <!--          <span><b>Include</b> {{selectedDimension?.viewValue}} =-->
+      <!--            <span *ngFor="let values of selectedDimensionValues">{{values}} or </span></span>-->
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</div>
+
+<div class="right-panel-footer">
+  <button (click)="add()" [disabled]="!filterForm.valid" color="primary"
+          mat-flat-button>Apply
+  </button>
+</div>
+

@@ -1,0 +1,110 @@
+<div [ngClass]="{'mat-elevation-z4': prevScrollpos > 0}" class="masthead">
+  <div class="masthead__content">
+    <div class="masthead__desktop">
+      <div class="masthead__left">
+        <div class="masthead__menu-icon-container">
+          <button (click)="sidenavService.toggle()" aria-label="Example icon button with a menu icon" mat-icon-button
+                  matTooltip="Main menu">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+        <div class="masthead__logo-container">
+          <a class="masthead__logo" routerLink="/">
+            <img height="30px" src="/assets/img/lars-logo.svg"/>
+          </a>
+        </div>
+        <!--        <div *ngIf="marketStatus | async as market">-->
+        <!--          <span>U.S markets {{market.isUSMarketOpen ? 'close' : 'open'}}-->
+        <!--            in {{ (market.closeTime - today) | date: 'h'}} hours {{ (market.closeTime - today) | date: 'm'}}-->
+        <!--            minutes</span>-->
+        <!--        </div>-->
+      </div>
+
+      <div class="masthead__right">
+        <div *ngIf="auth.user | async as user;" class="masthead__user">
+          <div class="example-flex-container">
+            <button *ngIf="(user$ | async)?.admin == true"
+                    aria-label="Administrator button"
+                    mat-icon-button matTooltip="Administrator">
+              <mat-icon color="primary">admin_panel_settings</mat-icon>
+            </button>
+            <button *ngIf="(user$ | async)?.verified == true"
+                    aria-label="Verified button"
+                    mat-icon-button matTooltip="Verified">
+              <mat-icon color="primary">verified</mat-icon>
+            </button>
+            <button aria-label="Notification button" matTooltip="Notifications" mat-icon-button>
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <button aria-label="Settings button" mat-icon-button matTooltip="Settings">
+              <mat-icon>settings</mat-icon>
+            </button>
+            <button [matMenuTriggerFor]="menu" aria-label="Example icon button with a vertical three dot icon"
+                    mat-icon-button>
+              <img [src]="user.photoURL">
+            </button>
+          </div>
+          <!-- <mat-icon matTooltip="Verified" color="primary">verified</mat-icon> -->
+          <mat-menu #menu="matMenu" class="masthead__dropdown-body--fixwidth">
+            <button mat-menu-item routerLink="./profile">Profile</button>
+            <button mat-menu-item>Profile settings</button>
+            <button mat-menu-item>Refer a friend</button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>Help Center</button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>Profile settings</button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+              <mat-slide-toggle (change)="toggleDarkTheme($event.checked)" [checked]="isDarkTheme | async">
+                Dark theme (beta)
+              </mat-slide-toggle>
+            </button>
+            <mat-divider></mat-divider>
+            <button (click)="tryLogout()" mat-menu-item>Sign out</button>
+          </mat-menu>
+        </div>
+      </div>
+      <div *ngIf="!hideFloatingAccount && auth.user | async as user;" class="masthead__account-floating">
+        <div class="masthead__sign-out-container">
+          <section style="padding: 20px 33px;">
+            <a class="masthead__user-avatar" height="70px" width="70px">
+              <img src="{{ user.photoURL }}">
+            </a>
+            <div>
+              <h1>{{ user.displayName }}</h1>
+              <div>{{ user.email }}</div>
+            </div>
+          </section>
+          <section style="padding: 8px;">
+            <a (click)="tryLogout()" color="primary" mat-stroked-button>Sign out</a>
+          </section>
+          <section style="padding: 14px 33px;">
+            <a class="" href="https://policies.larsalazar.com/privacy" target="_blank">Privacy Policy</a>
+            <a class="" href="https://larsalazar.com/termsofservice" target="_blank">Terms of Service</a>
+          </section>
+        </div>
+      </div>
+      <div class="masthead__mobile">
+        <button (click)="toggleSideNav()" aria-label="Mobile sidenav menu button" class="masthead__mobile-menu-btn"
+                mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="masthead__mobile-product-lockup">
+          <div class="masthead__logo-container">
+            <a class="masthead__logo" routerLink="/">
+              <img src="../../../../assets/img/lars-logo.svg" width="30"/>
+            </a>
+          </div>
+        </div>
+        <div class="masthead__mobile__search">
+          <form class="domain-search__form ng-pristine ng-valid ng-submitted">
+            <button (click)="toggleFloatingAccount()" color="primary" mat-flat-button
+                    style="min-width: 0;padding: 0 12px;">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

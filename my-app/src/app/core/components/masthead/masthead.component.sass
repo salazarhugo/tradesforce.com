@@ -1,0 +1,189 @@
+.masthead
+  position: sticky
+  top: 0
+  width: 100%
+  z-index: 3
+  color: black
+  transition: box-shadow 250ms
+
+.masthead__content
+  border-bottom: 1px solid rgba(0, 0, 0, .15)
+  box-sizing: border-box
+  width: 100%
+  padding: 0 8px
+  background-color: white
+
+.masthead__desktop
+  display: flex
+  justify-content: space-between
+
+.masthead__left
+  display: flex
+  align-items: center
+
+.masthead__right
+  display: flex
+  align-items: center
+  justify-content: flex-end
+  user-select: none
+
+.masthead__menu-icon-container
+  padding: 0 8px
+
+.masthead__logo-container
+  display: flex
+  align-items: center
+  transition: width 200ms cubic-bezier(0.6, 0.1, 0.6, 0.2)
+  width: 84px
+  height: 65px
+  margin-left: 8px
+
+//.masthead__logo >img
+  //animation: spin 2s linear infinite
+
+@keyframes spin
+  100%
+    transform: rotateY(360deg)
+
+.masthead__title
+  align-items: center
+  overflow: hidden
+  white-space: nowrap
+  float: left
+  font-family: Arial, Helvetica, sans-serif
+  font-size: 20px
+  line-height: 30px
+  color: #1c1c1c
+  font-weight: 200
+  animation: typing 1s steps(40, end)
+  margin: 0 auto
+
+.nav
+  display: flex
+
+.nav ul
+  display: flex
+  margin: 0
+
+.masthead__nav-item
+  align-items: center
+  border-bottom: 1px solid transparent
+  border-top: 1px solid transparent
+  color: #3c4043
+  cursor: pointer
+  font-size: 16px
+  font-weight: 400
+  list-style: none
+  margin-right: 30px
+  position: relative
+  text-decoration: none
+  transition: border-bottom .5s ease
+
+.masthead__nav-item--active
+  border-bottom: 1px solid #d8d8d8
+  border-top: 1px solid #d8d8d8
+  font-weight: 500
+
+.header__nav-item--active .header__nav-item__text::after
+  background-color: #4285f4
+
+.masthead__nav-item__text
+  -ms-flex-align: center
+  align-items: center
+  display: -ms-inline-flexbox
+  display: inline-flex
+  height: 100%
+  position: relative
+  text-align: center
+
+.masthead__user
+  display: flex
+  align-items: center
+
+.masthead__user-button
+  align-items: center
+  box-sizing: border-box
+  display: -ms-flexbox
+  display: flex
+  height: 100%
+  line-height: 1em
+  -ms-flex-pack: center
+  justify-content: center
+
+.masthead__user-avatar-container
+  display: flex
+  align-items: center
+  text-align: center
+  height: 40px
+  width: 40px
+  margin-left: 15px
+
+.masthead__user-avatar
+  flex: 1
+
+.masthead__user-avatar img
+  vertical-align: middle
+  border-radius: 50%
+  height: 32px
+  width: 32px
+
+.masthead__account-floating
+  position: absolute
+  right: 8px
+  top: 62px
+  width: 354px
+  border-radius: 8px
+  background: #fff
+  border: 1px solid #ccc
+  border-color: rgba(0, 0, 0, .2)
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .2)
+  color: #000
+
+section
+  text-align: center
+  border-bottom: 1px solid #ccc
+
+// USER DROPDOWN MENU
+.mat-menu-panel
+  width: 250px
+
+.mat-menu-item
+  height: 40px !important
+  line-height: 0 !important
+
+//  <!-- MOBILE -->
+.masthead__mobile
+  display: none
+  justify-content: space-between
+  align-items: center
+  overflow-y: hidden
+  width: 100%
+
+.masthead__mobile-product-lockup
+  display: flex
+  align-items: center
+  justify-content: center
+  flex: 1
+  height: 65px
+
+.masthead__mobile-menu-btn
+  cursor: pointer
+  height: 65px
+  width: 65px
+  position: absolute
+
+.masthead__mobile__search
+  height: 65px
+  left: 65px
+  position: absolute
+  top: 0
+  width: calc(100% - 65px)
+
+.masthead__mobile__search form
+  display: flex
+  -ms-flex-pack: end
+  justify-content: flex-end
+  margin: 15px 24px 15px 0
+
+.example-spacer
+  flex: 1 1 auto

@@ -1,0 +1,64 @@
+<header class="masthead">
+  <div class="container">
+    <div class="masthead__logo-container">
+      <a routerLink="/" class="masthead__logo">
+        <img src="assets/img/lars-logo.svg" height="30px"/>
+      </a>
+    </div>
+    <div class="nav">
+      <nav class="nav" role="navigation">
+        <ul>
+          <a routerLink="./investing" class="masthead__nav-item">
+            <span class="masthead__nav-item__text">Product</span>
+          </a>
+          <a routerLink="./platform" class="masthead__nav-item">
+            <span class="masthead__nav-item__text">Platform</span>
+          </a>
+          <a routerLink="./solutions" class="masthead__nav-item">
+            <span class="masthead__nav-item__text">Solutions</span>
+          </a>
+          <a routerLink="./purchase" class="masthead__nav-item">
+            <span class="masthead__nav-item__text"><b><i>Purchase</i></b></span>
+          </a>
+        </ul>
+      </nav>
+    </div>
+    <div class="masthead__right">
+      <mat-icon>search</mat-icon>
+      <mat-icon [mat-menu-trigger-for]="languageMenu">language</mat-icon>
+      <mat-menu #languageMenu="matMenu">
+        <button mat-menu-item *ngFor="let language of languages">
+          {{language}}
+        </button>
+      </mat-menu>
+      <div *ngIf="auth.user | async as user; else showLogin">
+        <button mat-flat-button color="primary" routerLink="/console/dashboard">Go to console</button>
+      </div>
+      <ng-template #showLogin>
+        <button mat-flat-button color="primary" (click)="openLoginDialog()">Sign In</button>
+      </ng-template>
+    </div>
+  </div>
+  <div class="masthead__mobile">
+    <button mat-icon-button class="masthead__mobile-menu-btn" aria-label="Mobile sidenav menu button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="masthead__mobile-product-lockup">
+      <div class="masthead__logo-container">
+        <a routerLink="/" class="masthead__logo">
+          <img src="assets/img/lars-logo.svg" height="30px"/>
+        </a>
+      </div>
+    </div>
+    <div class="masthead__mobile__search">
+      <form class="domain-search__form ng-pristine ng-valid ng-submitted">
+        <div *ngIf="auth.user | async as user; else showLogin">
+          <button mat-flat-button color="primary" routerLink="/console/dashboard">Console</button>
+        </div>
+        <ng-template #showLogin>
+          <button mat-flat-button color="primary" (click)="openLoginDialog()">Sign In</button>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</header>

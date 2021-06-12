@@ -1,0 +1,58 @@
+<stroked-card style="min-height: 650px">
+  <div class="panel-heading">
+    <span class="heading">{{title}}</span>
+    <span class="btn-group-right">
+        <!-- <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" matTooltip="Info">
+            <mat-icon>info</mat-icon>
+        </button> -->
+    </span>
+  </div>
+
+  <ng-template #loading class="spinner-container">
+    <mat-spinner style="margin:0 auto;"></mat-spinner>
+  </ng-template>
+
+  <div *ngIf="(data | async) as data; else loading" class="panel-body">
+    <ng-template #nodata>
+      <h1 class="mat-h1" style="margin: 0 auto; padding: 50px 10px">No data</h1>
+    </ng-template>
+
+    <div *ngIf="data.length > 0; else nodata">
+      <highcharts-chart
+        (chartInstance)="onChartInstance($event)" [Highcharts]="Highcharts"
+        [options]="chartOptions" class="highcharts-chart">
+      </highcharts-chart>
+
+      <div *ngIf="!hideTable" class="panel-table">
+        <table border="0" cellpadding="0" cellspacing="0" class="table" width="100%">
+          <thead>
+          <tr>
+            <th align="left" class="border-right" valign="middle" width="40%">&nbsp;</th>
+            <th align="right" matTooltip="Net Asset Value" valign="middle" width="30%">
+              NAV
+              <span>({{(user | async)?.country.currencySymbol}})</span>
+            </th>
+            <th align="right" valign="middle" width="30%">Weight</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of data | slice:0:6; index as i;">
+            <td align="left" class="border-right" valign="middle">
+              <i [style.background-color]="getSectorColor(i)" class="square"></i>
+              {{item?.name}}
+            </td>
+            <td align="right" valign="middle">{{item?.y | number: '1.2-2'}}</td>
+            <td align="right" valign="middle">{{getPercentage(i)}}%</td>
+          </tr>
+          <tr class="total">
+            <td align="left" class="border-right" valign="middle">Total</td>
+            <td align="right" valign="middle">{{total | number: '1.2-2'}}</td>
+            <td align="right" valign="middle"> 100.00%</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</stroked-card>

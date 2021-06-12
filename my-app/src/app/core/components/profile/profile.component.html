@@ -1,0 +1,90 @@
+<div *ngIf="user | async as user " fxLayout="column">
+  <h1 class="mat-h1">Profile</h1>
+  <stroked-card>
+    <h2 class="mat-h2">Basic Info</h2>
+    <form [formGroup]="profileForm">
+
+      <figure>
+        <img [src]="user.photoUrl" alt="User profile picture.">
+      </figure>
+
+      <div fxLayout="row" [style.padding.px]="20">
+        <div fxFlex="20%">
+          <span class="mat-caption">NAME</span>
+        </div>
+        <div fxFlex="80%"> {{user.name}}</div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div fxLayout="row" [style.padding.px]="20">
+        <div fxFlex="20%">
+          <span class="mat-caption">ROLE</span>
+        </div>
+        <div fxFlex="80%"> {{user.role}}</div>
+      </div>
+
+      <div>
+        <button mat-flat-button color="primary" disabled>Save changes</button>
+      </div>
+    </form>
+  </stroked-card>
+  <br>
+
+  <stroked-card>
+    <h2 class="mat-h2">Contact Info</h2>
+
+    <div fxLayout="row" [style.padding.px]="20">
+      <div fxFlex="20%">
+        <span class="mat-caption">EMAIL</span>
+      </div>
+      <div fxFlex="80%"> {{user.email}}</div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div fxLayout="row" fxLayoutAlign="center" [style.padding.px]="20">
+      <div fxFlex="20%">
+        <span class="mat-caption">PHONE</span>
+      </div>
+      <div fxFlex="80%"> {{user.phoneNumber}} 06 66 30 47 95</div>
+    </div>
+
+  </stroked-card>
+</div>
+
+
+<!-- EDIT PROFILE -->
+<!--<mat-form-field appearance="outline">-->
+<!--  <mat-label>Email</mat-label>-->
+<!--  <input type="email" aria-label="Email" matInput-->
+<!--         formControlName="email">-->
+<!--</mat-form-field>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--  <mat-form-field appearance="outline">-->
+<!--    <mat-label>Phone Number</mat-label>-->
+<!--    <input type="tel" aria-label="Phone Number" matInput-->
+<!--           formControlName="phoneNumber">-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <mat-form-field appearance="outline">-->
+<!--    <mat-label>Name</mat-label>-->
+<!--    <input type="text" aria-label="Name" matInput-->
+<!--           formControlName="name">-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+
+<!--<mat-form-field appearance="outline">-->
+<!--  <mat-label>Role</mat-label>-->
+<!--  <input type="text" aria-label="Role" matInput-->
+<!--         formControlName="role">-->
+<!--</mat-form-field>-->
+
+<!--<mat-form-field appearance="outline">-->
+<!--  <mat-label>Country</mat-label>-->
+<!--  <input type="text" aria-label="Country" matInput-->
+<!--         formControlName="country" [value]="profileForm.value.country.name">-->
+<!--</mat-form-field>-->

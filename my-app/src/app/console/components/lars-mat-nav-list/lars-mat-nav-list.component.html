@@ -1,0 +1,152 @@
+<mat-nav-list [ngSwitch]="currentRoute">
+
+  <div @myInsertRemoveTrigger *ngSwitchDefault>
+
+    <!-- Investing -->
+    <span class="group-label">Investing</span>
+
+    <a mat-list-item [ngClass]="{'nav-item--selected': selected === 'portfolios'}"
+       routerLink="./portfolios" (click)="selected = 'portfolios'">
+      <mat-icon class="main-icon"
+        [ngClass]="{'mat-icon--selected': selected === 'portfolios'}">web_asset
+      </mat-icon>
+      <span class="sidenav-item-label">Portfolios</span>
+    </a>
+
+    <a mat-list-item [ngClass]="{'nav-item--selected': selected === 'watchlists'}"
+       routerLink="./watchlists" (click)="selected = 'watchlists'">
+      <mat-icon
+        [ngClass]="{'mat-icon--selected': selected === 'watchlists'}">list_alt
+      </mat-icon>
+      <span class="sidenav-item-label">Watchlists</span>
+    </a>
+
+    <!-- Trading -->
+    <span class="group-label">Trading</span>
+
+    <a mat-list-item routerLink="./models" [ngClass]="{'nav-item--selected': selected === 'models'}"
+       (click)="selected = 'models'">
+      <mat-icon [ngClass]="{'mat-icon--selected': selected === 'models'}">assessment</mat-icon>
+      <span class="sidenav-item-label">Models</span>
+    </a>
+
+    <!-- Drive -->
+    <span class="group-label">Drive</span>
+
+    <a mat-list-item routerLink="./drive" [ngClass]="{'nav-item--selected': selected === 'drive'}"
+       (click)="selected = 'drive'">
+      <mat-icon [ngClass]="{'mat-icon--selected': selected === 'drive'}">storage</mat-icon>
+      <span class="sidenav-item-label">Drive</span>
+    </a>
+
+    <!-- Indicators -->
+    <span class="group-label">Indicators</span>
+
+    <a mat-list-item routerLink="./wfth" [ngClass]="{'nav-item--selected': selected === 'wfth'}"
+       (click)="selected = 'wfth'">
+      <mat-icon [ngClass]="{'mat-icon--selected': selected === 'wfth'}">architecture</mat-icon>
+      <span class="sidenav-item-label">World Forex Trading Hours</span>
+    </a>
+
+    <a mat-list-item routerLink="./csm" [ngClass]="{'nav-item--selected': selected === 'csm'}"
+       (click)="selected = 'csm'">
+      <mat-icon [ngClass]="{'mat-icon--selected': selected === 'csm'}">euro</mat-icon>
+      <span class="sidenav-item-label">CSM</span>
+    </a>
+
+    <!-- Media -->
+<!--    <span class="group-label">Media</span>-->
+
+<!--    <a mat-list-item routerLink="./models" [ngClass]="{'nav-item&#45;&#45;selected': selected === 'media'}"-->
+<!--       (click)="selected = 'media'">-->
+<!--      <mat-icon [ngClass]="{'mat-icon&#45;&#45;selected': selected === 'media'}">movie</mat-icon>-->
+<!--      <span class="sidenav-item-label">Media</span>-->
+<!--    </a>-->
+
+    <mat-divider></mat-divider>
+
+    <a mat-list-item>
+      <mat-icon>search_outline</mat-icon>
+      <span class="sidenav-item-label">Help and support</span>
+    </a>
+
+    <mat-divider></mat-divider>
+
+    <a mat-list-item>
+      <mat-icon class="material-icons-outlined">feedback</mat-icon>
+      <span class="sidenav-item-label">Send feedback</span>
+    </a>
+    <a mat-list-item>
+      <mat-icon>help_outline</mat-icon>
+      <span class="sidenav-item-label">Help and support</span>
+    </a>
+    <a mat-list-item *ngIf="user | async as user;" (click)="openCountryPickerDialog()">
+      <country-flag [country]="user.country.iso" style="margin-right: 0;"></country-flag>
+      <span class="sidenav-item-label">
+      {{user.country.name}} ({{user.country.currencyName}} {{user.country.currencySymbol}})
+    </span>
+    </a>
+
+  </div>
+
+  <div @myInsertRemoveTrigger *ngSwitchCase="'portfolio'">
+    <a mat-list-item (click)="navigateToMyPortfolios()">
+      <mat-icon class="material-icons-outlined">arrow_back</mat-icon>
+      <span class="sidenav-item-label">All my portfolios</span>
+    </a>
+    <mat-divider></mat-divider>
+    <div class="navigation-group">
+      <span class="group-label">{{(portfolio$ | async).name}}</span>
+      <a mat-list-item (click)="navigateToPortfolioOverview()">
+        <mat-icon>dashboard_outline</mat-icon>
+        <span class="sidenav-item-label">Overview</span>
+      </a>
+      <a mat-list-item (click)="navigateToPortfolioDiversification()">
+        <mat-icon>pie_chart_outline</mat-icon>
+        <span class="sidenav-item-label">Diversification</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon>analytics_outline</mat-icon>
+        <span class="sidenav-item-label">Analytics</span>
+      </a>
+    </div>
+  </div>
+
+  <div @myInsertRemoveTrigger *ngSwitchCase="'model'">
+    <a mat-list-item (click)="navigateToMyModels()">
+      <mat-icon class="material-icons-outlined">arrow_back</mat-icon>
+      <span class="sidenav-item-label">All my models</span>
+    </a>
+
+    <mat-divider></mat-divider>
+    <span class="group-label">Model</span>
+
+    <a mat-list-item [ngClass]="{'nav-item--selected': selected === 'model-overview'}"
+       routerLink="/" (click)="selected = 'model-overview'">
+      <mat-icon>dashboard</mat-icon>
+      <span class="sidenav-item-label">Overview</span>
+    </a>
+
+    <a mat-list-item [ngClass]="{'nav-item--selected': selected === 'model-propreties'}"
+       (click)="selected = 'model-propreties'">
+      <mat-icon class="material-icons-outlined">category</mat-icon>
+      <span class="sidenav-item-label">Propreties</span>
+    </a>
+
+    <a mat-list-item [ngClass]="{'nav-item--selected': selected === 'model-rules'}"
+       (click)="navigateToModelRules()">
+      <mat-icon class="material-icons-outlined">gavel</mat-icon>
+      <span class="sidenav-item-label">Rules</span>
+    </a>
+  </div>
+
+</mat-nav-list>
+<!--<div class="side-nav-footer">-->
+<!--  <a class="text-link secondary-link" rel="noopener" target="_blank"-->
+<!--     href="https://www.google.com/intl/en-GB/policies/privacy/">Privacy</a>-->
+<!--  <a class="text-link secondary-link" rel="noopener" target="_blank"-->
+<!--     href="https://domains.google.com/tos?hl=en-GB">Terms</a>-->
+<!--  <a class="text-link secondary-link"-->
+<!--     href="https://myaccount.google.com/language?continue=https%3A%2F%2Fdomains.google.com%2Fm%2Fregistrar%2F&amp;hl=en-GB">Language-->
+<!--  </a>-->
+<!--</div>-->

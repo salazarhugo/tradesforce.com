@@ -1,0 +1,39 @@
+<stroked-card>
+  <ng-template #loading class="spinner-container">
+    <mat-spinner style="margin:0 auto;"></mat-spinner>
+  </ng-template>
+
+  <div fxLayout="row" fxLayoutGap="50px" *ngIf="(stats | async) as stats; else loading" class="panel-body">
+    <ng-template #nodata>
+      <h1 class="mat-h1" style="margin: 0 auto; padding: 50px 10px">No data</h1>
+    </ng-template>
+
+    <div class="chart-header-item">
+      <h4 class="mat-subheading-1">Net Liquidation Value</h4>
+      <h1 class="mat-h1" [appIBnumber]="stats.totalMarketValue">
+<!--        {{stats.totalMarketValue | number: '1.2-2' }}-->
+      </h1>
+    </div>
+    <div class="chart-header-item">
+      <h4 class="mat-subheading-1">
+        Day Gain
+        <img *ngIf="stats.dayGain > 0" width="16px" height="16px" style="vertical-align: baseline; margin-left: 5px"
+             src="assets/img/green-arrow.svg">
+      </h4>
+      <h1 class="mat-h1">
+        {{stats.dayGain | number: '1.2-2'}}
+        <span class="mat-subheading-1">({{stats.dayChange | percent: '1.2-2'}})</span>
+      </h1>
+    </div>
+    <div class="chart-header-item">
+      <h4 class="mat-subheading-1">Total Gain</h4>
+      <h1 class="mat-h1">{{stats.totalGain | number: '1.2-2'}}</h1>
+    </div>
+    <div class="chart-header-item">
+      <!--      <h4 class="mat-subheading-1">Total Gain</h4>-->
+<!--      <highcharts-chart-->
+<!--        [Highcharts]="Highcharts" [options]="chartOptions" class="highcharts-chart">-->
+<!--      </highcharts-chart>-->
+    </div>
+  </div>
+</stroked-card>

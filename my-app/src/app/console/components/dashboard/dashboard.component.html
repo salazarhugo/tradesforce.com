@@ -1,0 +1,183 @@
+<div class="header">
+  <h1 class="mat-h1">Dashboard
+    <mat-icon class="material-icons-outlined data-status-icon"
+              matTooltip="This report is based on 100.0% of available data." color="primary">verified_user
+    </mat-icon>
+  </h1>
+  <div *ngIf="(a | async) as price">
+    {{b(price)}}
+  </div>
+  <div class="buttons">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="filter-container">
+  <!-- <mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngFor="let filter of tags" selectable="true" removable="true" (removed)="remove(fruit)">
+        {{fruit.name}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="New fruit..." [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matChipInputAddOnBlur="true"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field> -->
+</div>
+
+
+<!-- <p>Selected range: {{range.value | json}}</p> -->
+
+<div fxLayout="row wrap" fxLayoutGap="0.5% grid">
+
+  <div *ngIf="dataAvailable" class="item" fxFlex="100%">
+    <stroked-card style="margin-bottom: 15px">
+      <dashboard-performance [modelStats]="modelStats"></dashboard-performance>
+    </stroked-card>
+  </div>
+
+  <div class="item" fxFlex="calc(33% - 0.5%)" fxFlex.lg="">
+    <card-widget title="Historical Trades">
+      <mat-table [dataSource]="dataSource" matSort style="padding: 0;">
+
+        <!-- Entry date price Definition -->
+        <ng-container matColumnDef="entrydate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Entry date</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{renderTable__date(row.entrydate)}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Definition -->
+        <ng-container matColumnDef="symbol">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Symbol</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.symbol}} </mat-cell>
+        </ng-container>
+
+        <!-- Timeframe Definition -->
+        <ng-container matColumnDef="timeframe">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Timeframe</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.timeframe}} </mat-cell>
+        </ng-container>
+
+        <!-- Type price Definition -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Type</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.type}} </mat-cell>
+        </ng-container>
+
+        <!-- Profit Definition -->
+        <ng-container matColumnDef="profit">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Profit</mat-header-cell>
+          <mat-cell *matCellDef="let row" [ngClass]="{
+                  'positive' : row.profit > 0,
+                  'negative' : row.profit < 0
+               }"> {{renderTable__price(row.profit)}} </mat-cell>
+        </ng-container>
+
+        <!-- Quantity Definition -->
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Qte</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <mat-header-row *matHeaderRowDef="displayColumns">
+        </mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+      </mat-table>
+    </card-widget>
+  </div>
+
+  <div *ngIf="dataAvailable" class="item" fxFlex="calc(33% - 0.5%)">
+    <card-widget title="Key Statistics">
+      <table cellspacing="0">
+        <tbody>
+        <tr>
+          <td>Trades:</td>
+          <td>{{modelStats.profitArr.length}}</td>
+        </tr>
+        <tr>
+          <td>Lots:</td>
+          <td>{{modelStats.quantitySum.toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>Average Win:</td>
+          <td>{{modelStats.winAvg.toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>Average Loss:</td>
+          <td>{{modelStats.lossAvg.toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>Longs Won:</td>
+          <td>{{modelStats.winCount}}</td>
+        </tr>
+        <tr>
+          <td>Shorts Won:</td>
+          <!--            <td>{{i - modelStats.wins}}</td>-->
+        </tr>
+        <tr>
+          <td>Best Trade(€):</td>
+          <td>{{modelStats.profitMax}}</td>
+        </tr>
+        <tr>
+          <td>Worst Trade(€):</td>
+          <td>{{modelStats.profitMin}}</td>
+        </tr>
+        <tr>
+          <td>Total commission:</td>
+          <td>{{modelStats.commissionSum.toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>Avg. Trade Length:</td>
+        </tr>
+        <tr>
+          <td>Profit Factor:</td>
+        </tr>
+        <tr>
+          <td>Standard Deviation:</td>
+        </tr>
+        <tr>
+          <td>Sharpe Ratio:</td>
+        </tr>
+        <tr>
+          <td>Z-Score (Probability):</td>
+        </tr>
+        <tr>
+          <td>Expectancy:</td>
+        </tr>
+        </tbody>
+      </table>
+    </card-widget>
+  </div>
+
+  <div class="item" fxFlex="calc(33% - 0.5%)">
+    <widget-top-trading-models [modelsIds]="modelsIds"></widget-top-trading-models>
+  </div>
+
+  <div class="item" fxFlex="calc(33% - 0.5%)">
+    <card-widget title="Account Information">
+    </card-widget>
+  </div>
+
+  <div class="item" fxFlex="calc(33% - 0.5%)">
+    <card-widget title="Manage Your Account">
+    </card-widget>
+  </div>
+
+  <div class="item" fxFlex="calc(33% - 0.5%)">
+    <card-widget title="Account Information">
+    </card-widget>
+  </div>
+
+</div>

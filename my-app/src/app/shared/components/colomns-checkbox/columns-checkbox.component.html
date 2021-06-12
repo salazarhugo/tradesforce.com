@@ -1,0 +1,22 @@
+<button mat-button color="primary" [matMenuTriggerFor]="columnsMenu">Columns</button>
+<mat-menu #columnsMenu="matMenu">
+  <div mat-menu-item (click)="$event.stopPropagation();">
+    <mat-checkbox [checked]="allShow" [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+      <mat-label>Select All</mat-label>
+    </mat-checkbox>
+  </div>
+  <mat-divider></mat-divider>
+  <div mat-menu-item role="menuitemcheckbox" (click)="$event.stopPropagation();" *ngFor="let column of columns">
+    <mat-checkbox [(ngModel)]="column.show" (ngModelChange)="updateAllShow()">
+      <mat-label>{{column.displayName}}</mat-label>
+    </mat-checkbox>
+  </div>
+  <mat-divider></mat-divider>
+
+  <button mat-button matTooltip="Your tags" color="primary">
+    Cancel
+  </button>
+  <button mat-button matTooltip="Your tags" color="primary" (click)="apply()">
+    Apply
+  </button>
+</mat-menu>
